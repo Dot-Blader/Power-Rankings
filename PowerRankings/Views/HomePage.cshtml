@@ -1,0 +1,828 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<HomePage>
+@using Umbraco.Cms.Core.Models.Blocks;
+@{
+	Layout = "mainLayout.cshtml";
+
+	IEnumerable<BlockListItem> blocks = Model.List!;
+
+	blocks = blocks.OrderByDescending(b =>
+		b.Settings.Value<float?>("energyExponent")).ThenByDescending(b => b.Settings.Value<float?>("energyMultiplicator"));
+
+	var blocksOrderId = blocks.OrderByDescending(b => b.Settings.Value<int>("orderId"));
+}
+
+<section class="page">
+	<div class="container">
+		<div class="site-title">POWER RANKINGS</div>
+
+		<div class="options-menu options">
+			<div id="All" class="options-btn obtn">All</div>
+			<div id="Destiny" class="options-btn obtn btn-destiny">Destiny</div>
+			<div id="LittleNightmares" class="options-btn obtn btn-LN">Little Nightmares</div>
+			<div id="Sonic" class="options-btn obtn btn-sonic">SONIC</div>
+		</div>
+
+		<div class="tier">
+			<div class="tier-name">Boundless</div>
+			<div class="tier-content open">
+				<div class="umb-block-list">
+					@{
+						foreach (var block in blocksOrderId!.Where(b => b.Settings?.Value<string>("Tiers") == "Boundless"))
+						{
+							@await Html.PartialAsync($"~/Views/Partials/blocklist/Components/{block.Content.ContentType.Alias}.cshtml", block)
+						}
+					}
+				</div>
+			</div>
+			<div class="tier-end"></div>
+		</div>
+		<div class="tier">
+			<div class="tier-name">Super-Dimensional Level</div>
+			<div class="tier-content open">
+				<div class="umb-block-list">
+					@{
+						foreach (var block in blocksOrderId!.Where(b => b.Settings?.Value<string>("Tiers") == "Super-Dimensional Level"))
+						{
+							@await Html.PartialAsync($"~/Views/Partials/blocklist/Components/{block.Content.ContentType.Alias}.cshtml", block)
+						}
+					}
+				</div>
+			</div>
+			<div class="tier-end"></div>
+		</div>
+		<div class="tier">
+			<div class="tier-name">Infinite Dimensions Level</div>
+			<div class="tier-content open">
+				<div class="umb-block-list">
+					@{
+						foreach (var block in blocksOrderId!.Where(b => b.Settings?.Value<string>("Tiers") == "Infinite Dimensions Level"))
+						{
+							@await Html.PartialAsync($"~/Views/Partials/blocklist/Components/{block.Content.ContentType.Alias}.cshtml", block)
+						}
+					}
+				</div>
+			</div>
+			<div class="tier-end"></div>
+		</div>
+		<div class="tier">
+			<div class="tier-name">Finite Dimensions Level</div>
+			<div class="tier-content open">
+				<div class="umb-block-list">
+					@{
+						foreach (var block in blocksOrderId!.Where(b => b.Settings?.Value<string>("Tiers") == "Higher Dimensions Level"))
+						{
+							@await Html.PartialAsync($"~/Views/Partials/blocklist/Components/{block.Content.ContentType.Alias}.cshtml", block)
+						}
+					}
+				</div>
+			</div>
+			<div class="tier-end"></div>
+		</div>
+		<div class="tier">
+			<div class="tier-name">Infinite Multiverse Level</div>
+			<div class="tier-content open">
+				<div class="umb-block-list">
+					@{
+						foreach (var block in blocksOrderId!.Where(b => b.Settings?.Value<string>("Tiers") == "Infinite Multiverse Level"))
+						{
+							@await Html.PartialAsync($"~/Views/Partials/blocklist/Components/{block.Content.ContentType.Alias}.cshtml", block)
+						}
+					}
+				</div>
+			</div>
+			<div class="tier-end"></div>
+		</div>
+		<div class="tier">
+			<div class="tier-name">Multiverse Level</div>
+			<div class="tier-content open">
+				<div class="umb-block-list">
+					@{
+						foreach (var block in blocksOrderId!.Where(b => b.Settings?.Value<string>("Tiers") == "Multiverse Level"))
+						{
+							@await Html.PartialAsync($"~/Views/Partials/blocklist/Components/{block.Content.ContentType.Alias}.cshtml", block)
+						}
+					}
+				</div>
+			</div>
+			<div class="tier-end"></div>
+		</div>
+		<div class="tier">
+			<div class="tier-name">Timeline Level</div>
+			<div class="tier-content open">
+				<div class="umb-block-list">
+					@{
+						foreach (var block in blocksOrderId!.Where(b => b.Settings?.Value<string>("Tiers") == "Timeline Level"))
+						{
+							@await Html.PartialAsync($"~/Views/Partials/blocklist/Components/{block.Content.ContentType.Alias}.cshtml", block)
+						}
+					}
+				</div>
+			</div>
+			<div class="tier-end"></div>
+		</div>
+		<div class="tier">
+			<div class="tier-name">Infinite Universe Level</div>
+			<div class="tier-content open">
+				<div class="umb-block-list">
+					@{
+						foreach (var block in blocksOrderId!.Where(b => b.Settings?.Value<string>("Tiers") == "Infinite Universe Level"))
+						{
+							@await Html.PartialAsync($"~/Views/Partials/blocklist/Components/{block.Content.ContentType.Alias}.cshtml", block)
+						}
+					}
+				</div>
+			</div>
+			<div class="tier-end"></div>
+		</div>
+
+		<div class="tier">
+			<div class="tier-name">Universe Level</div>
+			<div class="tier-content open">
+				<div class="umb-block-list">
+					@{
+						foreach (var block in blocks!.Where(b => b.Settings?.Value<string>("Tiers") == "Below Infinite"))
+						{
+							var s = block.Settings;
+
+							bool inRange = false;
+							var e = s?.Value<int>("energyExponent");
+							var m = s?.Value<float>("energyMultiplicator");
+							if (e == 92 && m >= 2.82f) { inRange = true; }
+							else if (e > 92) { inRange = true; }
+							if (inRange)
+							{
+								@await Html.PartialAsync($"~/Views/Partials/blocklist/Components/{block.Content.ContentType.Alias}.cshtml", block)
+							}
+						}
+					}
+				</div>
+			</div>
+			<div class="tier-end"></div>
+		</div>
+		<div class="tier">
+			<div class="tier-name">Galaxy Level</div>
+			<div class="tier-content open">
+				<div class="umb-block-list">
+					@{
+						foreach (var block in blocks!.Where(b => b.Settings?.Value<string>("Tiers") == "Below Infinite"))
+						{
+							var s = block.Settings;
+
+							bool inRange = false;
+							var e = s?.Value<int>("energyExponent");
+							var m = s?.Value<float>("energyMultiplicator");
+							if (e == 66 && m >= 1.05f) { inRange = true; }
+							else if (e == 92 && m < 2.83f) { inRange = true; }
+							else if (e > 66 && e < 92) { inRange = true; }
+							if (inRange)
+							{
+								@await Html.PartialAsync($"~/Views/Partials/blocklist/Components/{block.Content.ContentType.Alias}.cshtml", block)
+							}
+						}
+					}
+				</div>
+			</div>
+			<div class="tier-end"></div>
+		</div>
+		<div class="tier">
+			<div class="tier-name">Solar System Level</div>
+			<div class="tier-content open">
+				<div class="umb-block-list">
+					@{
+						foreach (var block in blocks!.Where(b => b.Settings?.Value<string>("Tiers") == "Below Infinite"))
+						{
+							var s = block.Settings;
+
+							bool inRange = false;
+							var e = s?.Value<int>("energyExponent");
+							var m = s?.Value<float>("energyMultiplicator");
+							if (e == 45 && m >= 2.92f) { inRange = true; }
+							else if (e == 66 && m < 1.05f) { inRange = true; }
+							else if (e > 45 && e < 66) { inRange = true; }
+							if (inRange)
+							{
+								@await Html.PartialAsync($"~/Views/Partials/blocklist/Components/{block.Content.ContentType.Alias}.cshtml", block)
+							}
+						}
+					}
+				</div>
+			</div>
+			<div class="tier-end"></div>
+		</div>
+		<div class="tier">
+			<div class="tier-name">Star Level</div>
+			<div class="tier-content open">
+				<div class="umb-block-list">
+					@{
+						foreach (var block in blocks!.Where(b => b.Settings?.Value<string>("Tiers") == "Below Infinite"))
+						{
+							var s = block.Settings;
+
+							bool inRange = false;
+							var e = s?.Value<int>("energyExponent");
+							var m = s?.Value<float>("energyMultiplicator");
+							if (e == 41 && m >= 5.69f) { inRange = true; }
+							else if (e == 45 && m < 2.92f) { inRange = true; }
+							else if (e > 41 && e < 45) { inRange = true; }
+							if (inRange)
+							{
+								@await Html.PartialAsync($"~/Views/Partials/blocklist/Components/{block.Content.ContentType.Alias}.cshtml", block)
+							}
+						}
+					}
+				</div>
+			</div>
+			<div class="tier-end"></div>
+		</div>
+		<div class="tier">
+			<div class="tier-name">Brown Dwarf Level</div>
+			<div class="tier-content open">
+				<div class="umb-block-list">
+					@{
+						foreach (var block in blocks!.Where(b => b.Settings?.Value<string>("Tiers") == "Below Infinite"))
+						{
+							var s = block.Settings;
+
+							bool inRange = false;
+							var e = s?.Value<int>("energyExponent");
+							var m = s?.Value<float>("energyMultiplicator");
+							if (e == 37 && m >= 6.91f) { inRange = true; }
+							else if (e == 41 && m < 5.69f) { inRange = true; }
+							else if (e > 37 && e < 41) { inRange = true; }
+							if (inRange)
+							{
+								@await Html.PartialAsync($"~/Views/Partials/blocklist/Components/{block.Content.ContentType.Alias}.cshtml", block)
+							}
+						}
+					}
+				</div>
+			</div>
+			<div class="tier-end"></div>
+		</div>
+		<div class="tier">
+			<div class="tier-name">Large Planet Level</div>
+			<div class="tier-content open">
+				<div class="umb-block-list">
+					@{
+						foreach (var block in blocks!.Where(b => b.Settings?.Value<string>("Tiers") == "Below Infinite"))
+						{
+							var s = block.Settings;
+
+							bool inRange = false;
+							var e = s?.Value<int>("energyExponent");
+							var m = s?.Value<float>("energyMultiplicator");
+							if (e == 34 && m >= 1.59f) { inRange = true; }
+							else if (e == 37 && m < 6.91f) { inRange = true; }
+							else if (e > 34 && e < 37) { inRange = true; }
+							if (inRange)
+							{
+								@await Html.PartialAsync($"~/Views/Partials/blocklist/Components/{block.Content.ContentType.Alias}.cshtml", block)
+							}
+						}
+					}
+				</div>
+			</div>
+			<div class="tier-end"></div>
+		</div>
+		<div class="tier">
+			<div class="tier-name">Planet Level</div>
+			<div class="tier-content open">
+				<div class="umb-block-list">
+					@{
+						foreach (var block in blocks!.Where(b => b.Settings?.Value<string>("Tiers") == "Below Infinite"))
+						{
+							var s = block.Settings;
+
+							bool inRange = false;
+							var e = s?.Value<int>("energyExponent");
+							var m = s?.Value<float>("energyMultiplicator");
+							if (e == 32 && m >= 2.49f) { inRange = true; }
+							else if (e == 34 && m < 1.59f) { inRange = true; }
+							else if (e > 32 && e < 34) { inRange = true; }
+							if (inRange)
+							{
+								@await Html.PartialAsync($"~/Views/Partials/blocklist/Components/{block.Content.ContentType.Alias}.cshtml", block)
+							}
+						}
+					}
+				</div>
+			</div>
+			<div class="tier-end"></div>
+		</div>
+		<div class="tier">
+			<div class="tier-name">Small Planet Level</div>
+			<div class="tier-content open">
+				<div class="umb-block-list">
+					@{
+						foreach (var block in blocks!.Where(b => b.Settings?.Value<string>("Tiers") == "Below Infinite"))
+						{
+							var s = block.Settings;
+
+							bool inRange = false;
+							var e = s?.Value<int>("energyExponent");
+							var m = s?.Value<float>("energyMultiplicator");
+							if (e == 30 && m >= 1.81f) { inRange = true; }
+							else if (e == 32 && m < 2.49f) { inRange = true; }
+							else if (e > 30 && e < 32) { inRange = true; }
+							if (inRange)
+							{
+								@await Html.PartialAsync($"~/Views/Partials/blocklist/Components/{block.Content.ContentType.Alias}.cshtml", block)
+							}
+						}
+					}
+				</div>
+			</div>
+			<div class="tier-end"></div>
+		</div>
+		<div class="tier">
+			<div class="tier-name">Moon Level</div>
+			<div class="tier-content open">
+				<div class="umb-block-list">
+					@{
+						foreach (var block in blocks!.Where(b => b.Settings?.Value<string>("Tiers") == "Below Infinite"))
+						{
+							var s = block.Settings;
+
+							bool inRange = false;
+							var e = s?.Value<int>("energyExponent");
+							var m = s?.Value<float>("energyMultiplicator");
+							if (e == 29 && m >= 1.24f) { inRange = true; }
+							else if (e == 30 && m < 1.81f) { inRange = true; }
+							if (inRange)
+							{
+								@await Html.PartialAsync($"~/Views/Partials/blocklist/Components/{block.Content.ContentType.Alias}.cshtml", block)
+							}
+						}
+					}
+				</div>
+			</div>
+			<div class="tier-end"></div>
+		</div>
+		<div class="tier">
+			<div class="tier-name">Asteroid Level</div>
+			<div class="tier-content open">
+				<div class="umb-block-list">
+					@{
+						foreach (var block in blocks!.Where(b => b.Settings?.Value<string>("Tiers") == "Below Infinite"))
+						{
+							var s = block.Settings;
+
+							bool inRange = false;
+							var e = s?.Value<int>("energyExponent");
+							var m = s?.Value<float>("energyMultiplicator");
+							if (e == 26 && m >= 4.56f) { inRange = true; }
+							else if (e == 29 && m < 1.24f) { inRange = true; }
+							else if (e > 26 && e < 29) { inRange = true; }
+							if (inRange)
+							{
+								@await Html.PartialAsync($"~/Views/Partials/blocklist/Components/{block.Content.ContentType.Alias}.cshtml", block)
+							}
+						}
+					}
+				</div>
+			</div>
+			<div class="tier-end"></div>
+		</div>
+		<div class="tier">
+			<div class="tier-name">Continent Level</div>
+			<div class="tier-content open">
+				<div class="umb-block-list">
+					@{
+						foreach (var block in blocks!.Where(b => b.Settings?.Value<string>("Tiers") == "Below Infinite"))
+						{
+							var s = block.Settings;
+
+							bool inRange = false;
+							var e = s?.Value<int>("energyExponent");
+							var m = s?.Value<float>("energyMultiplicator");
+							if (e == 24 && m >= 3.18f) { inRange = true; }
+							else if (e == 26 && m < 4.56f) { inRange = true; }
+							else if (e > 24 && e < 26) { inRange = true; }
+							if (inRange)
+							{
+								@await Html.PartialAsync($"~/Views/Partials/blocklist/Components/{block.Content.ContentType.Alias}.cshtml", block)
+							}
+						}
+					}
+				</div>
+			</div>
+			<div class="tier-end"></div>
+		</div>
+		<div class="tier">
+			<div class="tier-name">Large Country Level</div>
+			<div class="tier-content open">
+				<div class="umb-block-list">
+					@{
+						foreach (var block in blocks!.Where(b => b.Settings?.Value<string>("Tiers") == "Below Infinite"))
+						{
+							var s = block.Settings;
+
+							bool inRange = false;
+							var e = s?.Value<int>("energyExponent");
+							var m = s?.Value<float>("energyMultiplicator");
+							if (e == 23 && m >= 4.18f) { inRange = true; }
+							else if (e == 24 && m < 3.18f) { inRange = true; }
+							if (inRange)
+							{
+								@await Html.PartialAsync($"~/Views/Partials/blocklist/Components/{block.Content.ContentType.Alias}.cshtml", block)
+							}
+						}
+					}
+				</div>
+			</div>
+			<div class="tier-end"></div>
+		</div>
+		<div class="tier">
+			<div class="tier-name">Country Level</div>
+			<div class="tier-content open">
+				<div class="umb-block-list">
+					@{
+						foreach (var block in blocks!.Where(b => b.Settings?.Value<string>("Tiers") == "Below Infinite"))
+						{
+							var s = block.Settings;
+
+							bool inRange = false;
+							var e = s?.Value<int>("energyExponent");
+							var m = s?.Value<float>("energyMultiplicator");
+							if (e == 22 && m >= 2.93f) { inRange = true; }
+							else if (e == 23 && m < 4.18f) { inRange = true; }
+							if (inRange)
+							{
+								@await Html.PartialAsync($"~/Views/Partials/blocklist/Components/{block.Content.ContentType.Alias}.cshtml", block)
+							}
+						}
+					}
+				</div>
+			</div>
+			<div class="tier-end"></div>
+		</div>
+		<div class="tier">
+			<div class="tier-name">Small Country Level</div>
+			<div class="tier-content open">
+				<div class="umb-block-list">
+					@{
+						foreach (var block in blocks!.Where(b => b.Settings?.Value<string>("Tiers") == "Below Infinite"))
+						{
+							var s = block.Settings;
+
+							bool inRange = false;
+							var e = s?.Value<int>("energyExponent");
+							var m = s?.Value<float>("energyMultiplicator");
+							if (e == 21 && m >= 4.18f) { inRange = true; }
+							else if (e == 22 && m < 2.93f) { inRange = true; }
+							if (inRange)
+							{
+								@await Html.PartialAsync($"~/Views/Partials/blocklist/Components/{block.Content.ContentType.Alias}.cshtml", block)
+							}
+						}
+					}
+				</div>
+			</div>
+			<div class="tier-end"></div>
+		</div>
+		<div class="tier">
+			<div class="tier-name">Island Level</div>
+			<div class="tier-content open">
+				<div class="umb-block-list">
+					@{
+						foreach (var block in blocks!.Where(b => b.Settings?.Value<string>("Tiers") == "Below Infinite"))
+						{
+							var s = block.Settings;
+
+							bool inRange = false;
+							var e = s?.Value<int>("energyExponent");
+							var m = s?.Value<float>("energyMultiplicator");
+							if (e == 19 && m >= 1.8f) { inRange = true; }
+							else if (e == 21 && m < 4.18f) { inRange = true; }
+							else if (e > 19 && e < 21) { inRange = true; }
+							if (inRange)
+							{
+								@await Html.PartialAsync($"~/Views/Partials/blocklist/Components/{block.Content.ContentType.Alias}.cshtml", block)
+							}
+						}
+					}
+				</div>
+			</div>
+			<div class="tier-end"></div>
+		</div>
+		<div class="tier">
+			<div class="tier-name">Mountain Level</div>
+			<div class="tier-content open">
+				<div class="umb-block-list">
+					@{
+						foreach (var block in blocks!.Where(b => b.Settings?.Value<string>("Tiers") == "Below Infinite"))
+						{
+							var s = block.Settings;
+
+							bool inRange = false;
+							var e = s?.Value<int>("energyExponent");
+							var m = s?.Value<float>("energyMultiplicator");
+							if (e == 17 && m >= 4.18f) { inRange = true; }
+							else if (e == 19 && m < 1.8f) { inRange = true; }
+							else if (e > 17 && e < 19) { inRange = true; }
+							if (inRange)
+							{
+								@await Html.PartialAsync($"~/Views/Partials/blocklist/Components/{block.Content.ContentType.Alias}.cshtml", block)
+							}
+						}
+					}
+				</div>
+			</div>
+			<div class="tier-end"></div>
+		</div>
+		<div class="tier">
+			<div class="tier-name">City Level</div>
+			<div class="tier-content open">
+				<div class="umb-block-list">
+					@{
+						foreach (var block in blocks!.Where(b => b.Settings?.Value<string>("Tiers") == "Below Infinite"))
+						{
+							var s = block.Settings;
+
+							bool inRange = false;
+							var e = s?.Value<int>("energyExponent");
+							var m = s?.Value<float>("energyMultiplicator");
+							if (e == 16 && m >= 2.64f) { inRange = true; }
+							else if (e == 17 && m < 4.18f) { inRange = true; }
+							if (inRange)
+							{
+								@await Html.PartialAsync($"~/Views/Partials/blocklist/Components/{block.Content.ContentType.Alias}.cshtml", block)
+							}
+						}
+					}
+				</div>
+			</div>
+			<div class="tier-end"></div>
+		</div>
+		<div class="tier">
+			<div class="tier-name">Town Level</div>
+			<div class="tier-content open">
+				<div class="umb-block-list">
+					@{
+						foreach (var block in blocks!.Where(b => b.Settings?.Value<string>("Tiers") == "Below Infinite"))
+						{
+							var s = block.Settings;
+
+							bool inRange = false;
+							var e = s?.Value<int>("energyExponent");
+							var m = s?.Value<float>("energyMultiplicator");
+							if (e == 13 && m >= 2.43f) { inRange = true; }
+							else if (e == 16 && m < 2.64f) { inRange = true; }
+							else if (e > 13 && e < 16) { inRange = true; }
+							if (inRange)
+							{
+								@await Html.PartialAsync($"~/Views/Partials/blocklist/Components/{block.Content.ContentType.Alias}.cshtml", block)
+							}
+						}
+					}
+				</div>
+			</div>
+			<div class="tier-end"></div>
+		</div>
+		<div class="tier">
+			<div class="tier-name">Multi-City Block Level</div>
+			<div class="tier-content open">
+				<div class="umb-block-list">
+					@{
+						foreach (var block in blocks!.Where(b => b.Settings?.Value<string>("Tiers") == "Below Infinite"))
+						{
+							var s = block.Settings;
+
+							bool inRange = false;
+							var e = s?.Value<int>("energyExponent");
+							var m = s?.Value<float>("energyMultiplicator");
+							if (e == 11 && m >= 4.18f) { inRange = true; }
+							else if (e == 13 && m < 2.43f) { inRange = true; }
+							else if (e > 11 && e < 13) { inRange = true; }
+							if (inRange)
+							{
+								@await Html.PartialAsync($"~/Views/Partials/blocklist/Components/{block.Content.ContentType.Alias}.cshtml", block)
+							}
+						}
+					}
+				</div>
+			</div>
+			<div class="tier-end"></div>
+		</div>
+		<div class="tier">
+			<div class="tier-name">City Block Level</div>
+			<div class="tier-content open">
+				<div class="umb-block-list">
+					@{
+						foreach (var block in blocks!.Where(b => b.Settings?.Value<string>("Tiers") == "Below Infinite"))
+						{
+							var s = block.Settings;
+
+							bool inRange = false;
+							var e = s?.Value<int>("energyExponent");
+							var m = s?.Value<float>("energyMultiplicator");
+							if (e == 10 && m >= 4.6f) { inRange = true; }
+							else if (e == 11 && m < 4.18f) { inRange = true; }
+							if (inRange)
+							{
+								@await Html.PartialAsync($"~/Views/Partials/blocklist/Components/{block.Content.ContentType.Alias}.cshtml", block)
+							}
+						}
+					}
+				</div>
+			</div>
+			<div class="tier-end"></div>
+		</div>
+		<div class="tier">
+			<div class="tier-name">Skyscraper Level</div>
+			<div class="tier-content open">
+				<div class="umb-block-list">
+					@{
+						foreach (var block in blocks!.Where(b => b.Settings?.Value<string>("Tiers") == "Below Infinite"))
+						{
+							var s = block.Settings;
+
+							bool inRange = false;
+							var e = s?.Value<int>("energyExponent");
+							var m = s?.Value<float>("energyMultiplicator");
+							if (e == 9 && m >= 8.37f) { inRange = true; }
+							else if (e == 10 && m < 4.6f) { inRange = true; }
+							if (inRange)
+							{
+								@await Html.PartialAsync($"~/Views/Partials/blocklist/Components/{block.Content.ContentType.Alias}.cshtml", block)
+							}
+						}
+					}
+				</div>
+			</div>
+			<div class="tier-end"></div>
+		</div>
+		<div class="tier">
+			<div class="tier-name">Building Level</div>
+			<div class="tier-content open">
+				<div class="umb-block-list">
+					@{
+						foreach (var block in blocks!.Where(b => b.Settings?.Value<string>("Tiers") == "Below Infinite"))
+						{
+							var s = block.Settings;
+
+							bool inRange = false;
+							var e = s?.Value<int>("energyExponent");
+							var m = s?.Value<float>("energyMultiplicator");
+							if (e == 9 && m >= 1.05f && m < 8.37f) { inRange = true; }
+							if (inRange)
+							{
+								@await Html.PartialAsync($"~/Views/Partials/blocklist/Components/{block.Content.ContentType.Alias}.cshtml", block)
+							}
+						}
+					}
+				</div>
+			</div>
+			<div class="tier-end"></div>
+		</div>
+		<div class="tier">
+			<div class="tier-name">House Level</div>
+			<div class="tier-content open">
+				<div class="umb-block-list">
+					@{
+						foreach (var block in blocks!.Where(b => b.Settings?.Value<string>("Tiers") == "Below Infinite"))
+						{
+							var s = block.Settings;
+
+							bool inRange = false;
+							var e = s?.Value<int>("energyExponent");
+							var m = s?.Value<float>("energyMultiplicator");
+							if (e == 7 && m >= 2.09f) { inRange = true; }
+							else if (e == 9 && m < 1.05f) { inRange = true; }
+							else if (e > 7 && e < 9) { inRange = true; }
+							if (inRange)
+							{
+								@await Html.PartialAsync($"~/Views/Partials/blocklist/Components/{block.Content.ContentType.Alias}.cshtml", block)
+							}
+						}
+					}
+				</div>
+			</div>
+			<div class="tier-end"></div>
+		</div>
+		<div class="tier">
+			<div class="tier-name">Wall Level</div>
+			<div class="tier-content open">
+				<div class="umb-block-list">
+					@{
+						foreach (var block in blocks!.Where(b => b.Settings?.Value<string>("Tiers") == "Below Infinite"))
+						{
+							var s = block.Settings;
+
+							bool inRange = false;
+							var e = s?.Value<int>("energyExponent");
+							var m = s?.Value<float>("energyMultiplicator");
+							if (e == 4 && m >= 1.5f) { inRange = true; }
+							else if (e == 7 && m < 2.09f) { inRange = true; }
+							else if (e > 4 && e < 7) { inRange = true; }
+							if (inRange)
+							{
+								@await Html.PartialAsync($"~/Views/Partials/blocklist/Components/{block.Content.ContentType.Alias}.cshtml", block)
+							}
+						}
+					}
+				</div>
+			</div>
+			<div class="tier-end"></div>
+		</div>
+		<div class="tier">
+			<div class="tier-name">Street Level</div>
+			<div class="tier-content open">
+				<div class="umb-block-list">
+					@{
+						foreach (var block in blocks!.Where(b => b.Settings?.Value<string>("Tiers") == "Below Infinite"))
+						{
+							var s = block.Settings;
+
+							bool inRange = false;
+							var e = s?.Value<int>("energyExponent");
+							var m = s?.Value<float>("energyMultiplicator");
+							if (e == 2 && m >= 3f) { inRange = true; }
+							else if (e == 4 && m < 1.5f) { inRange = true; }
+							else if (e > 2 && e < 4) { inRange = true; }
+							if (inRange)
+							{
+								@await Html.PartialAsync($"~/Views/Partials/blocklist/Components/{block.Content.ContentType.Alias}.cshtml", block)
+							}
+						}
+					}
+				</div>
+			</div>
+			<div class="tier-end"></div>
+		</div>
+		<div class="tier">
+			<div class="tier-name">Athlete Level</div>
+			<div class="tier-content open">
+				<div class="umb-block-list">
+					@{
+						foreach (var block in blocks!.Where(b => b.Settings?.Value<string>("Tiers") == "Below Infinite"))
+						{
+							var s = block.Settings;
+
+							bool inRange = false;
+							var e = s?.Value<int>("energyExponent");
+							var m = s?.Value<float>("energyMultiplicator");
+							if (e == 2 && m >= 1.06f && m < 3f) { inRange = true; }
+							if (inRange)
+							{
+								@await Html.PartialAsync($"~/Views/Partials/blocklist/Components/{block.Content.ContentType.Alias}.cshtml", block)
+							}
+						}
+					}
+				</div>
+			</div>
+			<div class="tier-end"></div>
+		</div>
+		<div class="tier">
+			<div class="tier-name">Human Level</div>
+			<div class="tier-content open">
+				<div class="umb-block-list">
+					@{
+						foreach (var block in blocks!.Where(b => b.Settings?.Value<string>("Tiers") == "Below Infinite"))
+						{
+							var s = block.Settings;
+
+							bool inRange = false;
+							var e = s?.Value<int>("energyExponent");
+							var m = s?.Value<float>("energyMultiplicator");
+							if (e == 1 && m >= 6f) { inRange = true; }
+							else if (e == 2 && m < 1.06f) { inRange = true; }
+							else if (e > 1 && e < 2) { inRange = true; }
+							if (inRange)
+							{
+								@await Html.PartialAsync($"~/Views/Partials/blocklist/Components/{block.Content.ContentType.Alias}.cshtml", block)
+							}
+						}
+					}
+				</div>
+			</div>
+			<div class="tier-end"></div>
+		</div>
+		<div class="tier">
+			<div class="tier-name">Below Average Human Level</div>
+			<div class="tier-content open">
+				<div class="umb-block-list">
+					@{
+						foreach (var block in blocks!.Where(b => b.Settings?.Value<string>("Tiers") == "Below Infinite"))
+						{
+							var s = block.Settings;
+
+							bool inRange = false;
+							var e = s?.Value<int>("energyExponent");
+							var m = s?.Value<float>("energyMultiplicator");
+							if (e == 0 && m >= 0f) { inRange = true; }
+							else if (e == 1 && m < 6f) { inRange = true; }
+							else if (e > 0 && e < 1) { inRange = true; }
+							if (inRange)
+							{
+								@await Html.PartialAsync($"~/Views/Partials/blocklist/Components/{block.Content.ContentType.Alias}.cshtml", block)
+							}
+						}
+					}
+				</div>
+			</div>
+			<div class="tier-end"></div>
+		</div>
+	</div>
+</section>

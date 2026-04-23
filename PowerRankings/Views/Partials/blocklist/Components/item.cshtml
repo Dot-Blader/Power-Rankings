@@ -1,0 +1,278 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockListItem>;
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@{
+	var content = (ContentModels.Item)Model.Content;
+	var settings = (ItemSettings?)Model.Settings;
+
+	if (settings == null)
+	{
+		return;
+	}
+
+	var groupMembers = content.GroupMembers?.OrderByDescending(b =>
+		b.Settings?.Value<float?>("orderId")) ?? null;
+
+	var sourceClass = "source";
+	if (settings.Franchise == "Destiny")
+	{
+		sourceClass = "source-destiny";
+	}
+	else if (settings.Franchise == "Sonic")
+	{
+		sourceClass = "source-sonic";
+	}
+	else if (settings.Franchise == "LittleNightmares")
+	{
+		sourceClass = "source-LN";
+	}
+}
+
+@if (settings.IsGroupMember == false && settings.IsGroup == false)
+{
+	<section class="card card-wc open @settings.Franchise">
+		<div class="card-base">
+			<div class="card-profile">
+				@if (content.ProfilePicture != null)
+				{
+					<div class="profile-pic-container"><img class="profile-pic" src="@content.ProfilePicture!.Url()" /></div>
+				}
+				else
+				{
+					<div class="profile-pic-container"><img class="profile-pic" src="/images/EmptyProfile.png" /></div>
+				}
+				<div class="card-title">
+					<div class="card-titles">
+						<div class="name">@content.CharacterName</div>
+						@if (content.CharacterTitle != "" && content.CharacterTitle != null)
+						{
+							<div class="title">@content.CharacterTitle</div>
+						}
+						@if (content.CharacterVariant != "" && content.CharacterVariant != null)
+						{
+							<div class="variant">Version: @content.CharacterVariant</div>
+						}
+						@if (settings.RankingType != "" && settings.RankingType != "None" && settings.RankingType != null)
+						{
+							<div class="ranking-type">@settings.RankingType</div>
+						}
+					</div>
+					<div class="sourceParent">
+						<div class="sourcePrefix">From: </div>
+						<div class="@sourceClass">@content.CharacterSource</div>
+					</div>
+				</div>
+			</div>
+			<div class="card-energy">
+				@if (settings.Minimum != "" && settings.Minimum != "None" && settings.Minimum != null)
+				{
+					<div class="energy">Minimum:</div>
+				}
+				<div class="energy">@content.EnergyMultiplicator</div>
+				@if (settings.Tiers == "Below Infinite")
+				{
+					<div class="energy">⋅</div>
+					<div class="supcont">
+						<div class="energy">10</div>
+						<span class="sup">@content.EnergyExponent</span>
+					</div>
+					<div>Joules</div>
+				}
+			</div>
+		</div>
+		<div class="card-content card-content-member closed">
+			<div class="details">@content.Details</div>
+			@if (content.MainPicture != null)
+			{
+				<div class="main-pic"><img class="main-pic" src="@content.MainPicture!.Url()" /></div>
+			}
+		</div>
+	</section>
+}
+else if (settings.IsGroupMember == false && settings.IsGroup == true)
+{
+	<section class="card card-group open @settings.Franchise">
+		<div class="card-base">
+			<div class="card-profile">
+				@if (content.ProfilePicture != null)
+				{
+					<div class="profile-pic-container"><img class="profile-pic" src="@content.ProfilePicture!.Url()" /></div>
+				}
+				else
+				{
+					<div class="profile-pic-container"><img class="profile-pic" src="/images/EmptyGroupProfile.png" /></div>
+				}
+				<div class="card-title">
+					<div class="card-titles">
+						<div class="name">@content.CharacterName</div>
+						@if (content.CharacterTitle != "" && content.CharacterTitle != null)
+						{
+							<div class="title">@content.CharacterTitle</div>
+						}
+						@if (content.CharacterVariant != "" && content.CharacterVariant != null)
+						{
+							<div class="variant">Version: @content.CharacterVariant</div>
+						}
+						@if (settings.RankingType != "" && settings.RankingType != "None" && settings.RankingType != null)
+						{
+							<div class="ranking-type">@settings.RankingType</div>
+						}
+					</div>
+					<div class="sourceParent">
+						<div class="sourcePrefix">From: </div>
+						<div class="@sourceClass">@content.CharacterSource</div>
+					</div>
+				</div>
+			</div>
+			<div class="card-energy">
+				@if (settings.Minimum != "" && settings.Minimum != "None" && settings.Minimum != null)
+				{
+					<div class="energy">Minimum:</div>
+				}
+				<div class="energy">@content.EnergyMultiplicator</div>
+				@if (settings.Tiers == "Below Infinite")
+				{
+					<div class="energy">⋅</div>
+					<div class="supcont">
+						<div class="energy">10</div>
+						<span class="sup">@content.EnergyExponent</span>
+					</div>
+					<div>Joules</div>
+				}
+			</div>
+		</div>
+		<div class="card-content card-content-group closed">
+			@if (content.Details != null)
+			{
+				<div class="details">@content.Details</div>
+			}
+			@if (groupMembers != null)
+			{
+				foreach (var member in groupMembers)
+				{
+					@await Html.PartialAsync($"~/Views/Partials/blocklist/Components/{member.Content.ContentType.Alias}.cshtml", member)
+				}
+			}
+		</div>
+	</section>
+}
+else if (settings.IsGroupMember == true && settings.IsGroup == false)
+{
+	<section class="card card-member open @settings.Franchise">
+		<div class="card-base">
+			<div class="card-profile">
+				@if (content.ProfilePicture != null)
+				{
+					<div class="profile-pic-container"><img class="profile-pic" src="@content.ProfilePicture!.Url()" /></div>
+				}
+				else
+				{
+					<div class="profile-pic-container"><img class="profile-pic" src="/images/EmptyProfile.png" /></div>
+				}
+				<div class="card-title">
+					<div class="card-titles">
+						<div class="name">@content.CharacterName</div>
+						@if (content.CharacterTitle != "" && content.CharacterTitle != null)
+						{
+							<div class="title">@content.CharacterTitle</div>
+						}
+						@if (content.CharacterVariant != "" && content.CharacterVariant != null)
+						{
+							<div class="variant">Version: @content.CharacterVariant</div>
+						}
+						@if (settings.RankingType != "" && settings.RankingType != "None" && settings.RankingType != null)
+						{
+							<div class="ranking-type">@settings.RankingType</div>
+						}
+					</div>
+					<div class="sourceParent">
+						<div class="sourcePrefix">From: </div>
+						<div class="@sourceClass">@content.CharacterSource</div>
+					</div>
+				</div>
+			</div>
+			<div class="card-energy">
+				<div class="energy">@content.EnergyMultiplicator</div>
+				@if (settings.Tiers == "Below Infinite")
+				{
+					<div class="energy">⋅</div>
+					<div class="supcont">
+						<div class="energy">10</div>
+						<span class="sup">@content.EnergyExponent</span>
+					</div>
+					<div>Joules</div>
+				}
+			</div>
+		</div>
+		<div class="card-content card-content-member closed">
+			<div class="details">@content.Details</div>
+			@if (content.MainPicture != null)
+			{
+				<div class="main-pic"><img class="main-pic" src="@content.MainPicture!.Url()" /></div>
+			}
+		</div>
+	</section>
+}
+else if (settings.IsGroupMember == true && settings.IsGroup == true)
+{
+	<section class="card card-group-member open @settings.Franchise">
+		<div class="card-base">
+			<div class="card-profile">
+				@if (content.ProfilePicture != null)
+				{
+					<div class="profile-pic-container"><img class="profile-pic" src="@content.ProfilePicture!.Url()" /></div>
+				}
+				else
+				{
+					<div class="profile-pic-container"><img class="profile-pic" src="/images/EmptyGroupProfile.png" /></div>
+				}
+				<div class="card-title">
+					<div class="card-titles">
+						<div class="name">@content.CharacterName</div>
+						@if (content.CharacterTitle != "" && content.CharacterTitle != null)
+						{
+							<div class="title">@content.CharacterTitle</div>
+						}
+						@if (content.CharacterVariant != "" && content.CharacterVariant != null)
+						{
+							<div class="variant">Version: @content.CharacterVariant</div>
+						}
+						@if (settings.RankingType != "" && settings.RankingType != "None" && settings.RankingType != null)
+						{
+							<div class="ranking-type">@settings.RankingType</div>
+						}
+					</div>
+					<div class="sourceParent">
+						<div class="sourcePrefix">From: </div>
+						<div class="@sourceClass">@content.CharacterSource</div>
+					</div>
+				</div>
+			</div>
+			<div class="card-energy">
+				<div class="energy">@content.EnergyMultiplicator</div>
+				@if (settings.Tiers == "Below Infinite")
+				{
+					<div class="energy">⋅</div>
+					<div class="supcont">
+						<div class="energy">10</div>
+						<span class="sup">@content.EnergyExponent</span>
+					</div>
+					<div>Joules</div>
+				}
+			</div>
+		</div>
+		<div class="card-content card-content-group closed">
+			@if (content.Details != null)
+			{
+				<div class="details">@content.Details</div>
+			}
+			@if (groupMembers != null)
+			{
+				foreach (var member in groupMembers)
+				{
+					@await Html.PartialAsync($"~/Views/Partials/blocklist/Components/{member.Content.ContentType.Alias}.cshtml", member)
+				}
+			}
+		</div>
+	</section>
+}
+

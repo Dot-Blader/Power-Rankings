@@ -1,0 +1,490 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+    font-family: "Inter", sans-serif;
+}
+
+body {
+}
+
+/* General */
+
+.open {
+    display: flex;
+}
+
+.closed {
+    display: none;
+}
+
+.page {
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+    background-image: url("/images/RankingBG.png");
+    background-size: cover;
+    background-position: top;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+@media (min-width: 1100px) {
+    .container {
+        width: 1100px;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        padding-bottom: 16px;
+    }
+}
+
+@media (max-width: 1100px) {
+    .container {
+        width: 480px;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        padding-bottom: 16px;
+    }
+}
+
+
+@media (min-width: 1100px) {
+    .site-title {
+        margin-top: 20px;
+        font-weight: 900;
+        font-size: 80px;
+        text-align: center;
+        color: #DDD;
+    }
+
+    .options {
+        flex-direction: row;
+    }
+}
+
+@media (max-width: 1100px) {
+    .site-title {
+        margin-top: 20px;
+        font-weight: 900;
+        font-size: 40px;
+        text-align: center;
+        color: #DDD;
+    }
+
+    .options {
+        flex-direction: column;
+    }
+}
+
+@media (min-width: 1100px) {
+    .obtn {
+        width: auto;
+        justify-content: left;
+    }
+}
+
+@media (max-width: 1100px) {
+    .obtn {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+.options-menu {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 16px;
+    color: #DDD;
+    background-color: #111;
+    border-radius: 20px 20px 20px 20px;
+    border: solid 2px #333;
+    box-shadow: rgba(0, 0, 0, 1) 0px 7px 20px 0px;
+    font-weight: 700;
+    font-size: 20px;
+    margin-bottom: 16px;
+}
+
+.options-btn {
+    display: flex;
+    flex-direction: row;
+    color: #DDD;
+    background-color: #111;
+    border-radius: 10px 10px 10px 10px;
+    border: solid 2px #333;
+    box-shadow: rgba(0, 0, 0, 1) 0px 7px 29px 0px;
+    padding: 8px;
+    cursor: pointer;
+}
+
+.btn-destiny {
+    font-family: "Cuprum", sans-serif;
+    text-transform: uppercase;
+}
+
+.btn-sonic {
+    font-family: "Sonic Logo", sans-serif;
+    text-transform: uppercase;
+}
+
+.btn-LN {
+    font-family: "Amatic SC", sans-serif;
+}
+
+.tier {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.tier-name {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 16px;
+    color: #DDD;
+    background-color: #111;
+    border-radius: 54px 54px 10px 10px;
+    border: solid 2px #333;
+    box-shadow: rgba(0, 0, 0, 1) 0px 7px 20px 0px;
+    font-weight: 900;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+.tier-end {
+    padding: 16px;
+    background-color: #111;
+    border-radius: 10px 10px 54px 54px;
+    border: solid 2px #333;
+    box-shadow: rgba(0, 0, 0, 1) 0px 7px 20px 0px;
+    height: 70px;
+}
+
+.umb-block-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* Specific */
+
+@media (min-width: 1100px) {
+    .card {
+        border-radius: 10px;
+        border: solid 2px #333;
+        box-shadow: rgba(0, 0, 0, 1) 0px 7px 29px 0px;
+        padding: 16px;
+        gap: 16px;
+        color: #DDD;
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 1100px) {
+    .card {
+        border-radius: 10px;
+        border: solid 2px #333;
+        box-shadow: rgba(0, 0, 0, 1) 0px 7px 29px 0px;
+        padding: 16px;
+        gap: 16px;
+        color: #DDD;
+        flex-direction: column;
+    }
+}
+
+@media (min-width: 1100px) {
+    .card-wc {
+        width: 1100px;
+        background-color: #111;
+    }
+
+        .card-wc div {
+            background-color: #111;
+        }
+}
+
+@media (max-width: 1100px) {
+    .card-wc {
+        width: 480px;
+        background-color: #111;
+    }
+
+        .card-wc div {
+            background-color: #111;
+        }
+}
+
+@media (min-width: 1100px) {
+    .card-group {
+        width: 1100px;
+        background-color: #111;
+    }
+
+        .card-group div {
+            background-color: #111;
+        }
+}
+
+@media (max-width: 1100px) {
+    .card-group {
+        width: 480px;
+        background-color: #111;
+    }
+
+        .card-group div {
+            background-color: #111;
+        }
+}
+
+@media (min-width: 1100px) {
+    .card-member {
+        width: 100%;
+        background-color: #111;
+    }
+
+        .card-member div {
+            background-color: #111;
+        }
+}
+
+@media (max-width: 1100px) {
+    .card-member {
+        width: 100%;
+        background-color: #111;
+    }
+
+        .card-member div {
+            background-color: #111;
+        }
+}
+
+@media (min-width: 1100px) {
+    .card-group-member {
+        width: 100%;
+        background-color: #111;
+    }
+
+        .card-group-member div {
+            background-color: #111;
+        }
+}
+
+@media (max-width: 1100px) {
+    .card-group-member {
+        width: 100%;
+        background-color: #111;
+    }
+
+        .card-group-member div {
+            background-color: #111;
+        }
+}
+
+@media (min-width: 1100px) {
+    .card-base {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        height: 115px;
+        background-color: #111;
+        cursor: pointer;
+    }
+}
+
+@media (max-width: 1100px) {
+    .card-base {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        align-items: start;
+        background-color: #111;
+        cursor: pointer;
+    }
+}
+
+.card-profile {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    height: 115px;
+}
+
+.profile-pic-container {
+    width: 110px;
+    height: 110px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-pic {
+    width: 110px;
+    height: 110px;
+    object-fit: cover;
+    overflow: hidden;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 1) 0px 7px 20px 0px;
+}
+
+.card-title {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 115px;
+}
+
+.card-titles {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.name {
+    font-weight: 900;
+    font-size: 20px;
+}
+
+.title {
+    font-weight: 500;
+    font-size: 17px;
+    color: #BBB;
+    font-style: italic;
+}
+
+.variant {
+    font-weight: 700;
+    font-size: 17px;
+    color: #DDD;
+}
+
+.ranking-type {
+    font-weight: 500;
+    font-size: 17px;
+    color: #BBB;
+}
+
+.sourceParent {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+
+.sourcePrefix {
+    font-weight: 700;
+    font-size: 17px;
+}
+
+.source {
+    font-weight: 700;
+    font-size: 17px;
+}
+
+.source-destiny {
+    font-family: "Cuprum", sans-serif;
+    font-weight: 900;
+    font-size: 17px;
+    position: relative;
+    top: 1.5px;
+}
+
+.source-sonic {
+    font-family: "Sonic Logo", sans-serif;
+    font-weight: 700;
+    font-size: 17px;
+    text-transform: uppercase;
+}
+
+.source-LN {
+    font-family: "Amatic SC", sans-serif;
+    font-weight: 900;
+    font-size: 20px;
+    position: relative;
+    top: -2.5px;
+}
+
+.card-energy {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+    align-items: center;
+    font-weight: 800;
+    font-size: 30px;
+}
+
+.supcont {
+    display: flex;
+    flex-direction: row;
+    background-color: #111;
+}
+
+@media (min-width: 1100px) {
+    .sup {
+        vertical-align: super;
+        font-size: 20px;
+        background-color: #111;
+    }
+}
+
+@media (max-width: 1100px) {
+    .sup {
+        vertical-align: super;
+        font-size: 15px;
+        background-color: #111;
+    }
+}
+
+.energy {
+}
+
+.card-content {
+    gap: 16px;
+    font-weight: 500;
+    font-size: 17px;
+}
+
+@media (min-width: 1100px) {
+    .card-content-member {
+        flex-direction: row;
+    }
+}
+
+@media (max-width: 1100px) {
+    .card-content-member {
+        flex-direction: column;
+    }
+}
+
+.card-content-group {
+    flex-direction: column;
+}
+
+.details {
+    background-color: #111;
+}
+
+    .details div {
+        background-color: #111;
+    }
+
+@media (min-width: 1100px) {
+    .main-pic {
+        width: 700px;
+        border-radius: 5px;
+        box-shadow: rgba(0, 0, 0, 1) 0px 7px 20px 0px;
+    }
+}
+
+@media (max-width: 1100px) {
+    .main-pic {
+        width: 100%;
+        border-radius: 5px;
+        box-shadow: rgba(0, 0, 0, 1) 0px 7px 20px 0px;
+    }
+}
