@@ -7,9 +7,9 @@
 	IEnumerable<BlockListItem> blocks = Model.List!;
 
 	blocks = blocks.OrderByDescending(b =>
-		b.Settings.Value<float?>("energyExponent")).ThenByDescending(b => b.Settings.Value<float?>("energyMultiplicator"));
+		b.Settings!.Value<float?>("energyExponent")).ThenByDescending(b => b.Settings!.Value<float?>("energyMultiplicator"));
 
-	var blocksOrderId = blocks.OrderByDescending(b => b.Settings.Value<int>("orderId"));
+	var blocksOrderId = blocks.OrderByDescending(b => b.Settings!.Value<int>("orderId"));
 }
 
 <section class="page">
