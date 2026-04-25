@@ -211,6 +211,7 @@ body {
 @media (max-width: 1100px) {
     .card-wc {
         width: 100%;
+/*        TEST*/
         background-color: #111;
     }
 
