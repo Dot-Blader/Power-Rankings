@@ -363,3 +363,5 @@ MigrationBackup/
 FodyWeavers.xsd
 /PowerRankings/appsettings.json
 /PowerRankings/appsettings.Development.json
+/PowerRankings/appsettings.json
+/PowerRankings/appsettings.Development.json
