@@ -30,7 +30,7 @@ jobs:
         run: if (Test-Path ./publish) { Remove-Item ./publish -Recurse -Force }
 
       - name: dotnet publish
-        run: dotnet publish ./PowerRankings.csproj -c Release -f net10.0 -o ./publish
+        run: dotnet publish ./PowerRankings/PowerRankings.csproj -c Release -f net10.0 -o ./publish
 
       - name: Verify CSS in publish
         run: Get-Content ./publish/wwwroot/css/style.css | Select-String "DEPLOY TEST"
