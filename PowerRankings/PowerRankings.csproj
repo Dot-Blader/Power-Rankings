@@ -26,5 +26,8 @@
     <CopyRazorGenerateFilesToPublishDirectory>true</CopyRazorGenerateFilesToPublishDirectory>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Content Include="wwwroot\css\**\*" CopyToPublishDirectory="PreserveNewest" />
+  </ItemGroup>
 
 </Project>
