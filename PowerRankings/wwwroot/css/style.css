@@ -166,6 +166,8 @@ body {
 }
 
 .umb-block-list {
+    width: 100%;
+    max-width: none;
     display: flex;
     flex-direction: column;
     gap: 8px;
