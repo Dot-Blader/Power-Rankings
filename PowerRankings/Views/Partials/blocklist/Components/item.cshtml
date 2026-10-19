@@ -69,6 +69,7 @@
 				}
 				@if (settings.Tiers == "Below Infinite")
 				{
+					<div class="energy">@content.EnergyMultiplicator</div>
 					if (settings.EnergyExponent > 2)
 					{
 						<div class="energy">⋅</div>
@@ -143,6 +144,7 @@ else if (settings.IsGroupMember == false && settings.IsGroup == true)
 				{
 					if (settings.EnergyExponent > 2)
 					{
+						<div class="energy">@content.EnergyMultiplicator</div>
 						<div class="energy">⋅</div>
 						<div class="supcont">
 							<div class="energy">10</div>
@@ -221,6 +223,7 @@ else if (settings.IsGroupMember == true && settings.IsGroup == false)
 				{
 					if (settings.EnergyExponent > 2)
 					{
+						<div class="energy">@content.EnergyMultiplicator</div>
 						<div class="energy">⋅</div>
 						<div class="supcont">
 							<div class="energy">10</div>
@@ -293,6 +296,7 @@ else if (settings.IsGroupMember == true && settings.IsGroup == true)
 				{
 					if (settings.EnergyExponent > 2)
 					{
+						<div class="energy">@content.EnergyMultiplicator</div>
 						<div class="energy">⋅</div>
 						<div class="supcont">
 							<div class="energy">10</div>
