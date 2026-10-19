@@ -86,7 +86,7 @@
 			<div class="tier-content open">
 				<div class="umb-block-list">
 					@{
-						foreach (var block in blocksOrderId!.Where(b => b.Settings?.Value<string>("Tiers") == "Temporal"))
+						foreach (var block in blocksOrderId!.Where(b => b.Settings?.Value<string>("Tiers") == "Infinite-Temporal"))
 						{
 							@await Html.PartialAsync($"~/Views/Partials/blocklist/Components/{block.Content.ContentType.Alias}.cshtml", block)
 						}
